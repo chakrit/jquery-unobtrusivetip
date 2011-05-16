@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+  <title>jQuery-UnobtrusiveTip sample</title>
+  <link href="blueprint/screen.css" rel="stylesheet" type="text/css" media="screen, projection" />
+  <link href="blueprint/print.css" rel="stylesheet" type="text/css" media="print" />
+  <!--[if lt IE 8]
+    <link href="blueprint/ie.css" rel="stylesheet" type="text/css" media="screen, projection" />
+  <![endif]-->
+  <style type="text/css">
+    body
+    {
+      padding-top: 2em;
+      font-family: Futura, 'Trebuchet MS' , Arial, sans-serif;
+      font-size: 24px;
+    }
+    
+    .hidden 
+    {
+      display: none;
+    }
+    
+    .popup
+    {
+      padding: 1em;
+      background-color: black;
+      color: White;
+    }
+    
+    a 
+    {
+      display: block;
+    }
+  </style>
+  <script src="jquery-1.6.1.min.js" type="text/javascript"></script>
+  <script src="jquery-unobtrusive.js" type="text/javascript"></script>
+  <script src="site.js" type="text/javascript"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="span-24 last">
+      <h1>
+        jquery-unobtrusivetip</h1>
+    </div>
+    <div class="span-24 last">
+      <ul>
+        <li><a id="normalTooltip" href="#normal">Normal</a></li>
+        <li><a id="rightTooltip" href="#alignRight">Align-right</a></li>
+        <li><a id="clickTooltip" href="#clickTrigger">"click" trigger</a></li>
+        <li><a id="hoverTooltip" href="#hoverTrigger">"hover" trigger</a></li>
+        <li><a id="animTooltip" href="#anim">different animation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="normal" class="hidden popup">
+    <p>
+      NORMAL</p>
+  </div>
+  <div id="alignRight" class="hidden popup">
+    <p>
+      ALIGN RIGHT</p>
+  </div>
+  <div id="clickTrigger" class="hidden popup">
+    <p>
+      CLICK TRIGGER</p>
+    <p>
+      <a href="#" class="close">Close</a></p>
+  </div>
+  <div id="hoverTrigger" class="hidden popup">
+    <p>
+      HOVER TRIGGER</p>
+  </div>
+  <div id="anim" class="hidden popup">
+    <p>
+      CHANGE ANIMATION</p>
+  </div>
+</body>
+</html>
