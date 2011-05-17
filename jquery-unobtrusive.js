@@ -13,14 +13,13 @@ jQuery.fn.tooltip = (function () {
   // define triggers
   var triggers = {
     click: function (elem, target, show, hide) {
+      var isOpening = false;
+
+      $(elem).click(function () { ((isOpening = !isOpening) ? show : hide)(); });
       $('.close', target).click(function () {
         hide();
         isOpening = false;
       });
-
-      var isOpening = false;
-      $(elem).click(function () { ((isOpening = !isOpening) ? show : hide)(); });
-      closeBtn.click(function () { hide(); isOpening = false; });
     },
 
     hover: function (elem, target, show, hide) {
@@ -47,18 +46,15 @@ jQuery.fn.tooltip = (function () {
       });
 
       $(elem).mouseleave(function () {
-        console.log("MOUSELEAVE");
         shouldClose = true;
         delayedCheck();
       });
 
       $(target).mouseenter(function () {
         shouldClose = false;
-        delayedCheck();
       });
 
       $(target).mouseleave(function () {
-        console.log("MOUSELEAVE");
         shouldClose = true;
         delayedCheck();
       });
@@ -112,21 +108,26 @@ jQuery.fn.tooltip = (function () {
   // actual tooltip function composed from triggers and open/close animations
   return function (opts) {
     opts = $.extend({}, defaults, opts);
-    console.log("OPTS: %o", opts);
+
+    // resolve function to use depending on options
+    var trigger = triggers[opts.trigger],
+      aligner = aligners[opts.align],
+      opener = openers[opts.open],
+      closer = closers[opts.close];
 
     $(this).each(function () {
       var me = $(this),
         target = $(me.attr('href'));
 
-      triggers[opts.trigger](me, target, function () {
-        aligners[opts.align](me, target);
+      trigger(me, target, function () {
+        aligner(me, target);
+
         $(target).stop(true, true);
-        openers[opts.open](target);
+        opener(target);
       }, function () {
         $(target).stop(true, true);
-        closers[opts.close](target);
-      }
-      );
+        closer(target);
+      });
     });
   };
 
